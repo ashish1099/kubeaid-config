@@ -5,7 +5,7 @@ metadata:
     kubeaid.io/version: "13.0.0"
     kubeaid.io/managed-by: "kubeaid"
     kubeaid.io/priority: "default"
-  name: netbird
+  name: netbird-operator
   namespace: argocd
 spec:
   destination:
@@ -18,7 +18,7 @@ spec:
       targetRevision: HEAD
       helm:
         valueFiles:
-          - $values/k8s/netbird/argocd-apps/values-netbird.yaml
+          - $values/k8s/netbird/argocd-apps/values-netbird-operator.yaml
     - repoURL: https://github.com/ashish1099/kubeaid-config.git
       targetRevision: HEAD
       ref: values
