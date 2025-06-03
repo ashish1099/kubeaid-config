@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    kubeaid.io/version: "13.0.0"
+    kubeaid.io/managed-by: "kubeaid"
+    kubeaid.io/priority: "default"
+  name: k8s-configs
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+  project: kubeaid
+  source:
+    repoURL: https://github.com/ashish1099/kubeaid-config.git
+    path: k8s/kubeaid-demo-hcloud/k8s-configs
+    targetRevision: HEAD
+    directory:
+      recurse: true
