@@ -1,0 +1,69 @@
+forkURLs:
+  # KubeAid repository URL (in HTTPs syntax).
+  # Defaults to Obmondo's KubeAid repository.
+  kubeaid: https://github.com/Obmondo/KubeAid
+
+  # Your KubeAid config fork URL (in HTTPs syntax).
+  kubeaidConfig: https://github.com/ashish1099/kubeaid-config
+
+# Kubernetes cluster and control-plane specific configurations.
+cluster:
+
+  # Kubernetes cluster name.
+  name: kubeaid-kds-demo
+
+  # Kubernetes version to use.
+  #
+  # We're using Kubermatic KubeOne v1.10 under the hood, to initialize the Kubernete cluster.
+  # And the supported Kubernetes versions are specified here :
+  # https://docs.kubermatic.com/kubeone/v1.10/architecture/compatibility/supported-versions/.
+  k8sVersion: v1.32.0
+
+  # Kubeaid version to use.
+  #
+  # By default, the latest KubeAid version is used.
+  # You an view all the KubeAid versions here : https://github.com/Obmondo/kubeaid/releases.
+  kubeaidVersion: 16.0.0
+
+cloud:
+  bare-metal:
+    # If you don't provide details about an SSH private key, then the SSH auth socket will be used
+    # to authenticate to your Linux based bare-metal servers.
+    # So, whenever Kubermatic KubeOne tries to authenticate to your bare-metal Linux servers,
+    # KubeAid Bootstrap Script will prompt you to touch the YubiKey.
+    ssh: {}
+    #   privateKey:
+    #     privateKeyFilePath: ./outputs/ssh/rsa/openssh/.key
+
+    controlPlane:
+      endpoint:
+        host: "172.17.4.71"
+        port: 6443
+      hosts:
+        - privateAddress: "172.17.4.71"
+          sshPort: 22
+          sshUsername: root
+        - privateAddress: "172.17.4.72"
+          sshPort: 22
+          sshUsername: root
+        - privateAddress: "172.17.4.73"
+          sshPort: 22
+          sshUsername: root
+
+    nodeGroups:
+      - name: bootstrapper
+        hosts:
+          - privateAddress: "172.17.4.74"
+            sshPort: 22
+            sshUsername: root
+
+        # These labels and taints will be propagated to each node managed by this node-group.
+        labels:
+          node-role.kubernetes.io/bootstrapper: ""
+          node.cluster.x-k8s.io/nodegroup: bootstrapper
+        taints: []
+
+
+# ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDAhxkaT6cj+uRLA/wWu5d+5yun6NQXeUOE0tqGi6H8Dn3ZqC6wlYK7uHwOxZILJGa4X/kzGWHlZ6wfZw6lgbqunkJHLf3oXXI1cJGBkzPVBYkCnJItSP19fAty5C//SxNYlngicf+vowWdlq6O4ECkH7NdmVne4MHYz2DpRMjobjKDB1OW/0ESBlZhxzevwNnNqVdwXoz8852PQqo41w/uUAx5393Wj/VF2WB20HDWy97Ye6m3eV+ZMGiTJkumaNQ7JPdRTeNpl8zPwLJ0X0FS4H8z7wGfrUpVzlGuXjSGN3TxTewEW2WnD5yL0XRZznVBGARH71ut23VtFS8Fo8xsPn1ePjHho2BBviAxQ2ACp4UkzMt40lQNR7jtNZY/e2ZYMRVfJ+3cJgGfiwBfDjo6fgdPZowmGMJa0ydKT/WTt5LjEIiACFUMrMwn8yauXHybZCnUCduY/9AqSqh3ut0fKOsUS4tjj6/UUGDOjHE60nOvv3P7vCHQZqoznxC6oirYbTCCqQAK4Gm7vyNvzA5ep/4xMcp3vJVIKMj9z3sCSuvQYD2NsuC3H128FUYNjQMt2Z8dFO0oWme/x8Ghj9KEPLHGk452gif0JNzAgRRsXVmvGClx5XrrTa0jBAn7uT9DOZYMRPKYM7bluR2RtjHY1creHuH1DXTY3xaoUX65lw== ashish_cardno:000605646298
+# sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIE677esCjoW/sxg1mYUvVluTTrPM+1on/Vxc6hDzO8WUAAAABHNzaDo= ashish_4mgdlr3.linux-pc.sdfi.dk
+
