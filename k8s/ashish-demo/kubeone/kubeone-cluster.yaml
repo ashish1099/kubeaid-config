@@ -10,11 +10,15 @@ versions:
   kubernetes: v1.35.6
 
 apiEndpoint:
-  host: ashish-demo
+  host: 10.219.137.172
   port: 6443
 
 controlPlane:
   hosts:
+    -
+      sshPort: 22
+      sshPrivateKeyFile: /root/.ssh/id_ed25519
+      publicAddress: 10.219.137.172
 
 clusterNetwork:
   podSubnet: "10.244.0.0/16"
@@ -49,7 +53,7 @@ helmReleases:
             rollOutPods: true
             priorityClassName: system-node-critical
           kubeProxyReplacement: "true"
-          k8sServiceHost: "ashish-demo"
+          k8sServiceHost: "10.219.137.172"
           k8sServicePort: "6443"
           ipam:
             mode: kubernetes
