@@ -19,6 +19,8 @@ controlPlane:
       sshPort: 22
       sshPrivateKeyFile: /root/.ssh/id_ed25519
       publicAddress: 10.219.137.172
+      kubelet:
+        maxPods: 300
 
 clusterNetwork:
   podSubnet: "10.244.0.0/16"
