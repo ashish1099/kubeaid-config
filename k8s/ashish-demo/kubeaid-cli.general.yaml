@@ -1,0 +1,45 @@
+git:
+  sshUsername: git
+  useSSHAgent: false
+  privateKeyFilePath: /root/.ssh/id_ed25519
+
+forkURLs:
+  kubeaid:
+    url: https://github.com/Obmondo/KubeAid.git
+    version: 31.1.0
+  kubeaidConfig:
+    url: git@github.com:ashish1099/kubeaid-config.git
+    directory: 
+
+cluster:
+  type: workload
+  name: ashish-demo
+  k8sVersion: v1.35.6
+  enableAuditLogging: false
+  apiServer:
+    extraArgs: {}
+    extraVolumes: []
+    files: []
+  netbird:
+    dnsZone: ashish.demo
+  argoCD:
+    deployKeys:
+      kubeaidConfig:
+        privateKeyFilePath: /root/.ssh/id_ed25519
+
+kubePrometheus:
+  version: v0.18.0
+
+cloud:
+  bare-metal:
+    ssh:
+      port: 22
+      privateKeyFilePath: /root/.ssh/id_ed25519
+    controlPlane:
+      endpoint:
+        host: 10.219.137.172
+        port: 6443
+      hosts:
+        - publicAddress: 10.219.137.172
+
+
