@@ -32,6 +32,8 @@ kubePrometheus:
 
 cloud:
   bare-metal:
+    kubelet:
+      maxPods: 300
     ssh:
       port: 22
       privateKeyFilePath: /root/.ssh/id_ed25519
