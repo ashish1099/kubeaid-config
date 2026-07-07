@@ -38,6 +38,17 @@ operatingSystemManager:
 
 staticWorkers:
   hosts:
+    -
+      sshPort: 22
+      sshPrivateKeyFile: /root/.ssh/id_ed25519
+      publicAddress: 10.219.137.74
+
+      labels:
+        {}
+      taints:
+        []
+      kubelet:
+        maxPods: 180
 
 dynamicWorkers: []
 

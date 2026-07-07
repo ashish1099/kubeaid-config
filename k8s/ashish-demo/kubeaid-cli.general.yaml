@@ -43,5 +43,8 @@ cloud:
         port: 6443
       hosts:
         - publicAddress: 10.219.137.172
-
+    nodeGroups:
+      - name: workers
+        hosts:
+          - publicAddress: 10.219.137.74
 
